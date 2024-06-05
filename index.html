@@ -30,6 +30,8 @@
         <h1>Here is text</h1>
         <!-- Button to open date picker -->
         <button id="datePickerButton">Select Date</button>
+        <!-- Button to open time picker -->
+        <button id="timePickerButton">Select Time</button>
     </div>
 
     <!-- Include flatpickr JavaScript -->
@@ -41,6 +43,18 @@
             onClose: function(selectedDates, dateStr, instance) {
                 // Update button text with selected date
                 document.getElementById("datePickerButton").textContent = dateStr;
+            }
+        });
+
+        // Initialize flatpickr time picker
+        flatpickr("#timePickerButton", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true,
+            onClose: function(selectedDates, dateStr, instance) {
+                // Update button text with selected time
+                document.getElementById("timePickerButton").textContent = dateStr;
             }
         });
     </script>
