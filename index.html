@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini App</title>
+    <!-- Include flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,6 +28,21 @@
 <body>
     <div class="container">
         <h1>Here is text</h1>
+        <!-- Button to open date picker -->
+        <button id="datePickerButton">Select Date</button>
     </div>
+
+    <!-- Include flatpickr JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        // Initialize flatpickr date picker
+        flatpickr("#datePickerButton", {
+            dateFormat: "Y-m-d",
+            onClose: function(selectedDates, dateStr, instance) {
+                // Update button text with selected date
+                document.getElementById("datePickerButton").textContent = dateStr;
+            }
+        });
+    </script>
 </body>
 </html>
