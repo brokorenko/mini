@@ -10,7 +10,7 @@ body {
   background: linear-gradient(45deg, #f4f4f4 25%, transparent 25%),
               linear-gradient(-45deg, #f4f4f4 25%, transparent 25%),
               linear-gradient(45deg, transparent 75%, #f4f4f4 75%),
-              linear-gradient(-45deg, modal  75%, #f4f4f4 75%);
+              linear-gradient(-45deg, transparent 75%, #f4f4f4 75%);
   background-size: 20px 20px;
 }
 
@@ -66,9 +66,6 @@ button:focus {
 
 .flatpickr-calendar {
   position: fixed; /* or absolute */
-}
-
-.flatpickr-calendar {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -99,9 +96,16 @@ button:focus {
   animation: pulse 2s infinite;
 }
 
+.button-container {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-around; /* Distribute buttons evenly */
+  align-items: center; /* Align items vertically in the center */
+  margin-top: 20px; /* Optional: Add margin top */
+}
+
 .topic-button {
   padding: 20px 20px;
-  margin: 0px 2px;
+  margin: 0 2px;
   font-size: 16px;
   color: white;
   background-color: #007bff;
@@ -126,18 +130,16 @@ button:focus {
   }
 }
 
-.modal {
+.modal-window {
   position: absolute;
   top: 50%;
   left: 50%;
-  right: auto;
-  bottom: auto;
-  marginRight: -50%;
   transform: translate(-50%, -50%);
   background: white;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1000; /* Ensure it is above the overlay */
 }
 
 .overlay {
@@ -146,7 +148,8 @@ button:focus {
   left: 0;
   right: 0;
   bottom: 0;
-  backgroundColor: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 500; /* Ensure it is below the modal */
 }
 
 .value-item {
@@ -168,7 +171,7 @@ button:focus {
 }
 
 .flatpickr-alt-input-class {
-  padding: 12px 0px;
+  padding: 12px 0;
   font-size: 16px;
   cursor: pointer;
   border: none;
@@ -181,6 +184,10 @@ button:focus {
   justify-content: center;
   width: 200px;
   text-align: center;
+}
+
+.flatpickr-alt-input-class::placeholder {
+  color: white;
 }
 
 /* General reset for padding and margins */
@@ -209,7 +216,6 @@ nav ul {
 
 /* Style the nav list items */
 nav ul li {
-
   font-size: 16px;
   cursor: pointer;
   border: none;
@@ -227,7 +233,7 @@ nav ul li {
 /* Style the nav links */
 nav ul li a {
   display: block;
-  color: white;
+  color: white !important;
   text-align: center;
   padding: 14px 20px;
   text-decoration: none;
@@ -250,3 +256,34 @@ p {
   text-align: center;
   font-size: 18px;
 }
+
+.navbar {
+  background-color: #007bff; /* Example background color */
+  padding: 10px; /* Example padding */
+}
+
+.navbar-brand {
+  display: inline-block;
+  height: 100px; /* Adjust height as needed */
+  padding: 10px; /* Adjust padding as needed */
+}
+
+.navbar-brand img {
+  height: 100%; /* Ensures the image fills the height of the .navbar-brand */
+  width: auto; /* Allows the image to scale proportionally */
+  vertical-align: middle; /* Aligns the image vertically within the .navbar-brand */
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav .nav-item {
+  margin-right: 10px; /* Adjust spacing between items */
+}
+
+.navbar-nav .nav-item:last-child {
+  margin-right: 0; /* Remove margin from the last item */
+}
+

@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import App from '../App';
-import '../App.css';  // Import your custom styles if needed
+import '../App.css';  // Ensure your custom styles are imported
 
-
-Modal.setAppElement('#root'); // Set the app element to the root element of your application
-
+Modal.setAppElement('#root'); // Set the app element for react-modal
 
 const ValuePickerModal = ({ valuesList, buttonText, h2Text, onValueSelect }) => {
   const [selectedValue, setSelectedValue] = useState(null);
@@ -34,7 +31,7 @@ const ValuePickerModal = ({ valuesList, buttonText, h2Text, onValueSelect }) => 
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Select Value"
-        className="modal"
+        className="modal-window"
         overlayClassName="overlay"
       >
         <h2>{h2Text}</h2>

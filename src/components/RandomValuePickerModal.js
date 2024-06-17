@@ -58,16 +58,21 @@ const RandomValuePickerModal = ({ onSave }) => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Select Value"
-        className="modal"
+        className="modal-window"
         overlayClassName="overlay"
       >
         <h2>Select Topic</h2>
-        <button className="topic-button"  onClick={handleRandomClick}>Random</button>
-        <button className="topic-button" onClick={handleIDoItClick}>I Do It</button>
-        <button className="topic-button" onClick={closeModal}>Close</button>
+        <div className="button-container">
+          <button className="topic-button"  onClick={handleRandomClick}>Random</button>
+          <button className="topic-button" onClick={handleIDoItClick}>I Do It</button>
+          <button className="topic-button" onClick={closeModal}>Close</button>
+          {response && (
+            <button className="topic-button" onClick={handleSubmit}>Submit</button>
+          )}
+        </div>
         {response && 
               <div>
-              <h1>{selectedTopic}</h1>
+              <h2>{selectedTopic}</h2>
               <div>
                 {selectedQuestions.map((question, index) => (
                   <p key={index}>- {question}</p>
@@ -75,9 +80,6 @@ const RandomValuePickerModal = ({ onSave }) => {
               </div>
             </div>
         }
-        {response && (
-          <button onClick={handleSubmit}>Submit</button>
-        )}
       </Modal>
     </div>
   );
