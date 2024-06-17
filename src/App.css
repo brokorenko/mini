@@ -1,0 +1,252 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(45deg, #f4f4f4 25%, transparent 25%),
+              linear-gradient(-45deg, #f4f4f4 25%, transparent 25%),
+              linear-gradient(45deg, transparent 75%, #f4f4f4 75%),
+              linear-gradient(-45deg, modal  75%, #f4f4f4 75%);
+  background-size: 20px 20px;
+}
+
+.container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-out;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.picker-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  transition: background 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  text-align: center;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #a777e3, #6e8efb);
+  transform: scale(1.05);
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(110, 142, 251, 0.5);
+}
+
+.flatpickr-wrapper {
+  display: inline;
+  width: 100%;
+}
+
+.flatpickr-calendar {
+  position: fixed; /* or absolute */
+}
+
+.flatpickr-calendar {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.flatpickr-calendar .flatpickr-month {
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.flatpickr-calendar .flatpickr-day:hover,
+.flatpickr-calendar .flatpickr-day.today {
+  background: #6e8efb;
+  color: white;
+}
+
+.pulsing-button {
+  padding: 20px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  animation: pulse 2s infinite;
+}
+
+.topic-button {
+  padding: 20px 20px;
+  margin: 0px 2px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+  }
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px 10px rgba(0, 123, 255, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+  }
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  marginRight: -50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backgroundColor: rgba(0, 0, 0, 0.75);
+}
+
+.value-item {
+  cursor: pointer;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.value-item:hover {
+  background-color: #f0f0f0;
+}
+
+.react-datepicker-wrapper {
+  display: block;
+}
+
+.react-datepicker {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.flatpickr-alt-input-class {
+  padding: 12px 0px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  transition: background 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  text-align: center;
+}
+
+/* General reset for padding and margins */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Style the navigation bar */
+nav {
+  background-color: #6e8efb;
+  overflow: hidden;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Style the nav list */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* Style the nav list items */
+nav ul li {
+
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  transition: background 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  text-align: center;
+}
+
+/* Style the nav links */
+nav ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+/* Change link color on hover */
+nav ul li a:hover {
+  background: linear-gradient(135deg, #a777e3, #6e8efb);
+  transform: scale(1.05);
+}
+
+/* Add some basic styling to the pages */
+h2 {
+  margin-top: 20px;
+  text-align: center;
+}
+
+p {
+  text-align: center;
+  font-size: 18px;
+}
