@@ -15,16 +15,29 @@ const Create = () => {
     const [userId, setUserId] = useState(null);
     const datePickerRef = useRef(null);
   
-    const participantLimitList = ['2', '3', '4 Optimal', '5', '6', '7', '8', '9'];
-    const participantLevelList = ['A1 Beginner', 'A2 Elementary', 'B1 Intermediate', 'B2 Upper-Intermediate', 'C1 Advanced', 'C2 Proficiency'];
-  
+    const participantLimits = new Map();
+    participantLimits.set('2', 2);
+    participantLimits.set('3', 3);
+    participantLimits.set('4 Optimal', 4);
+    participantLimits.set('5', 5);
+    participantLimits.set('6', 6);
+    participantLimits.set('7', 7);
+    participantLimits.set('8', 8);
+    participantLimits.set('9', 9);
+
+    const participantLevels = new Map();
+    participantLevels.set('A1 Beginner', 'A1');
+    participantLevels.set('A2 Elementary', 'A2');
+    participantLevels.set('B1 Intermediate', 'B1');
+    participantLevels.set('B2 Upper-Intermediate', 'B2');
+    participantLevels.set('C1 Advanced', 'C1');
+    participantLevels.set('C2 Proficiency', 'C2');
+      
     useEffect(() => {
       // Check if Telegram WebApp object is available
       if (window.Telegram && window.Telegram.WebApp) {
         if(window.Telegram.WebApp) {
-          setUserId(window.Telegram.WebApp);
-          {userId && <p>User ID: {JSON.stringify(userId, null, 2)}</p>}
-  
+          setUserId(window.Telegram.WebApp.initDataUnsafe.user.id);
         }
       } 
     }, []);
@@ -50,22 +63,22 @@ const Create = () => {
     const sendDataToBot = () => {
       if (window.Telegram && window.Telegram.WebApp) {
         const data = {
-          //make a single data/time object
           date: selectedDate,
           topic: randomValue,
           participantLimit: participantLimit,
-          participantLevel: participantLevel
+          participantLevel: participantLevel,
+          userId: userId
         };
         window.Telegram.WebApp.sendData(JSON.stringify(data)); // Send data as a JSON string
       }
     };
   
     const handleParticipantsLimit = (selectedLimit) => {
-      setParticipantLimit(selectedLimit);
+      setParticipantLimit(participantLimits.get(selectedLimit));
     };
   
     const handleLevel = (selectedLevel) => {
-      setParticipantLevel(selectedLevel);
+      setParticipantLevel(participantLevels.get(selectedLevel));
     };
   
     const handleRandomValueSave = (selectedValue) => {
@@ -107,9 +120,9 @@ const Create = () => {
           />
         </div>
   
-        <ValuePickerModal valuesList={participantLimitList} buttonText="Patricipants Limit🚫" h2Text="Patricipants Limit" onValueSelect={handleParticipantsLimit} />
+        <ValuePickerModal valuesList={Array.from(participantLimits.keys())} buttonText="Patricipants Limit🚫" h2Text="Patricipants Limit" onValueSelect={handleParticipantsLimit} />
   
-        <ValuePickerModal valuesList={participantLevelList} buttonText="Patricipants Level⬆️" h2Text="Patricipants Level" onValueSelect={handleLevel} />
+        <ValuePickerModal valuesList={Array.from(participantLevels.keys())} buttonText="Patricipants Level⬆️" h2Text="Patricipants Level" onValueSelect={handleLevel} />
   
         <RandomValuePickerModal onSave={handleRandomValueSave} />
   

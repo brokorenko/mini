@@ -53,7 +53,8 @@ const Manage = () => {
           transition={{ duration: 0.8 }}
         >
           <h1>Speaking club managment</h1>
-          
+          {userId && <p>User ID: {JSON.stringify(userId, null, 2)}</p>}
+
           {response && 
               <div>
               <h1>{response}</h1>
