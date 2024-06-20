@@ -35,10 +35,8 @@ const Create = () => {
       
     useEffect(() => {
       // Check if Telegram WebApp object is available
-      if (window.Telegram && window.Telegram.WebApp) {
-        if(window.Telegram.WebApp) {
-          setUserId(window.Telegram.WebApp.initDataUnsafe.user.id);
-        }
+      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
+        setUserId(window.Telegram.WebApp.initDataUnsafe.user.id);
       } 
     }, []);
   
