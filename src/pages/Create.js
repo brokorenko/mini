@@ -105,16 +105,16 @@ const Create = () => {
               enableTime: true,
               altFormat: "F j, Y H:i",
               dateFormat: 'Y-m-d H:i',
-              position: "auto center",
+              position: "auto top",
               altInput: true,
               altInputClass: "flatpickr-alt-input-class",
-              disableMobile: true,
+              disableMobile: false,
               minDate: "today",
               maxDate: new Date().fp_incr(30), // 14 days from now
               time_24hr: true
             }}
             style={{ display: 'none' }}
-            readOnly
+            readOnly={true} 
           />
         </div>
   
