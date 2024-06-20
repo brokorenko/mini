@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import '../App.css';
 import ValuePickerModal from '../components/ValuePickerModal';
 import RandomValuePickerModal from '../components/RandomValuePickerModal';
+import Balloons from '../components/Balloons';
+import axios from 'axios';
 
 const Create = () => {
     const [selectedDate, setSelectedDate] = useState('');
@@ -14,6 +16,7 @@ const Create = () => {
     const [randomValue, setRandomValue] = useState(null);
     const [userId, setUserId] = useState(null);
     const datePickerRef = useRef(null);
+    const [showBalloons, setShowBalloons] = useState(false);
   
     const participantLimits = new Map();
     participantLimits.set('2', 2);
@@ -57,17 +60,53 @@ const Create = () => {
       
       return `${day}-${month}-${year} ${hours}:${minutes}`;
     };
+
+    // Function to handle showing balloons and then closing the app
+    const handleCongratulations = () => {
+      setShowBalloons(true);
+
+      // Close the Mini App window after a delay (e.g., 3 seconds)
+      setTimeout(() => {
+          closeMiniApp();
+      }, 3000);
+    };
+
+    const closeMiniApp = () => {
+      console.log("Closing the Mini App window");
+      window.Telegram.WebApp.close();
+    };
   
     const sendDataToBot = () => {
-      if (window.Telegram && window.Telegram.WebApp) {
+      // if (window.Telegram && window.Telegram.WebApp && userId) {
+      if (window.Telegram) {
+
         const data = {
           date: selectedDate,
           topic: randomValue,
           participantLimit: participantLimit,
           participantLevel: participantLevel,
-          userId: userId
+          userId: 431957763
         };
-        window.Telegram.WebApp.sendData(JSON.stringify(data)); // Send data as a JSON string
+
+        // const config = {
+        //   headers: {
+        //     'Content-Type': 'application/json', // Specify the content type
+        //     'Authorization': 'Bearer YOUR_ACCESS_TOKEN' // Include authorization token if required
+        //   }
+        // };
+        
+        axios.post('http://localhost:3000/club', data)
+          .then(response => {
+            console.log('Success:', response.data);
+            handleCongratulations();
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+
+          // closeMiniApp();
+
+        // window.Telegram.WebApp.sendData(JSON.stringify(data)); // Send data as a JSON string
       }
     };
   
@@ -116,6 +155,7 @@ const Create = () => {
             style={{ display: 'none' }}
             readOnly={true} 
           />
+          {showBalloons && <Balloons />}
         </div>
   
         <ValuePickerModal valuesList={Array.from(participantLimits.keys())} buttonText="Patricipants Limit🚫" h2Text="Patricipants Limit" onValueSelect={handleParticipantsLimit} />

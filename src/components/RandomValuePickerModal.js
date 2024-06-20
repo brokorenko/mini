@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
-import App from '../App';
 import '../App.css';  // Import your custom styles if needed
 
 Modal.setAppElement('#root'); // Set the app element to the root element of your application
