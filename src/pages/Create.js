@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import '../App.css';
 import ValuePickerModal from '../components/ValuePickerModal';
 import RandomValuePickerModal from '../components/RandomValuePickerModal';
-import Balloons from '../components/Balloons';
+import Congratulations from '../components/Congratulations';
 import axios from 'axios';
 
 const Create = () => {
@@ -16,7 +16,7 @@ const Create = () => {
     const [randomValue, setRandomValue] = useState(null);
     const [userId, setUserId] = useState(null);
     const datePickerRef = useRef(null);
-    const [showBalloons, setShowBalloons] = useState(false);
+    const [showCongratulations, setShowCongratulations] = useState(false);
   
     const participantLimits = new Map();
     participantLimits.set('2', 2);
@@ -61,9 +61,9 @@ const Create = () => {
       return `${day}-${month}-${year} ${hours}:${minutes}`;
     };
 
-    // Function to handle showing balloons and then closing the app
+    // Function to handle showing congratulations and then closing the app
     const handleCongratulations = () => {
-      setShowBalloons(true);
+      setShowCongratulations(true);
 
       // Close the Mini App window after a delay (e.g., 3 seconds)
       setTimeout(() => {
@@ -156,7 +156,7 @@ const Create = () => {
             style={{ display: 'none' }}
             readOnly={true} 
           />
-          {showBalloons && <Balloons />}
+          {showCongratulations && <Congratulations />}
         </div>
   
         <ValuePickerModal valuesList={Array.from(participantLimits.keys())} buttonText="Patricipants Limit🚫" h2Text="Patricipants Limit" onValueSelect={handleParticipantsLimit} />
