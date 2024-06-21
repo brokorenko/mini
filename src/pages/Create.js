@@ -40,7 +40,7 @@ const Create = () => {
       // Check if Telegram WebApp object is available
       if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
         setUserId(window.Telegram.WebApp.initDataUnsafe.user.id);
-      } 
+      }
     }, []);
   
     const handleDateClick = () => {
@@ -75,7 +75,7 @@ const Create = () => {
       console.log("Closing the Mini App window");
       window.Telegram.WebApp.close();
     };
-  
+
     const sendDataToBot = () => {
       // if (window.Telegram && window.Telegram.WebApp && userId) {
       if (window.Telegram) {
@@ -150,7 +150,8 @@ const Create = () => {
               disableMobile: false,
               minDate: "today",
               maxDate: new Date().fp_incr(30), // 14 days from now
-              time_24hr: true
+              time_24hr: true,
+              defaultDate: new Date().fp_incr(1) // 14 days from now
             }}
             style={{ display: 'none' }}
             readOnly={true} 

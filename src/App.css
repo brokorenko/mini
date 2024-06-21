@@ -193,6 +193,26 @@ button:focus {
   color: white;
 }
 
+.flatpickr-mobile {
+  padding: 12px 0;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  transition: background 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  text-align: center;
+}
+
+.flatpickr-mobile::before {
+  content: '🕒';
+}
+
 /* General reset for padding and margins */
 * {
   margin: 0;
