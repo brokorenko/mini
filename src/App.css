@@ -1,228 +1,28 @@
 body {
-  max-width: 100%;
-  overflow-x: hidden;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #11e959);
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
   height: 100vh;
-  background: linear-gradient(45deg, #f4f4f4 25%, transparent 25%),
-              linear-gradient(-45deg, #f4f4f4 25%, transparent 25%),
-              linear-gradient(45deg, transparent 75%, #f4f4f4 75%),
-              linear-gradient(-45deg, transparent 75%, #f4f4f4 75%);
-  background-size: 20px 20px;
+  overflow-y: hidden;
 }
 
-.container {
-  text-align: center;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 1s ease-out;
-}
-
-h1 {
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.picker-container {
-  position: relative;
-  margin-bottom: 20px;
-}
-
-button {
-  padding: 12px 25px;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
-  color: white;
-  transition: background 0.3s ease, transform 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  text-align: center;
-}
-
-button:hover {
-  background: linear-gradient(135deg, #a777e3, #6e8efb);
-  transform: scale(1.05);
-}
-
-button:focus {
-  outline: none;
-  box-shadow: 0 0 10px rgba(110, 142, 251, 0.5);
-}
-
-.flatpickr-wrapper {
-  display: inline;
-  width: 100%;
-}
-
-.flatpickr-calendar {
-  position: fixed; /* or absolute */
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.flatpickr-calendar .flatpickr-month {
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
-  color: white;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
-.flatpickr-calendar .flatpickr-day:hover,
-.flatpickr-calendar .flatpickr-day.today {
-  background: #6e8efb;
-  color: white;
-}
-
-.pulsing-button {
-  padding: 20px 20px;
-  font-size: 16px;
-  color: white;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  outline: none;
-  animation: pulse 2s infinite;
-}
-
-.button-container {
-  display: flex; /* Use flexbox for layout */
-  justify-content: space-around; /* Distribute buttons evenly */
-  align-items: center; /* Align items vertically in the center */
-  margin-top: 20px; /* Optional: Add margin top */
-}
-
-.topic-button {
-  padding: 20px 20px;
-  margin: 0 2px;
-  font-size: 16px;
-  color: white;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  outline: none;
-}
-
-@keyframes pulse {
+@keyframes gradient {
   0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+    background-position: 0% 50%;
   }
-  70% {
-    transform: scale(1.1);
-    box-shadow: 0 0 10px 10px rgba(0, 123, 255, 0);
+
+  50% {
+    background-position: 100% 50%;
   }
+
   100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+    background-position: 0% 50%;
   }
-}
-
-.modal-window {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  z-index: 1000; /* Ensure it is above the overlay */
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75);
-  z-index: 500; /* Ensure it is below the modal */
-}
-
-.value-item {
-  cursor: pointer;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-}
-
-.value-item:hover {
-  background-color: #f0f0f0;
-}
-
-.react-datepicker-wrapper {
-  display: block;
-}
-
-.react-datepicker {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.flatpickr-alt-input-class {
-  padding: 12px 0;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
-  color: white;
-  transition: background 0.3s ease, transform 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  text-align: center;
-}
-
-.flatpickr-alt-input-class::placeholder {
-  color: white;
-}
-
-.flatpickr-mobile {
-  padding: 12px 0;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
-  color: white;
-  transition: background 0.3s ease, transform 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  text-align: center;
-}
-
-.flatpickr-mobile::before {
-  content: '🕒';
-}
-
-/* General reset for padding and margins */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
 /* Style the navigation bar */
 nav {
-  background-color: #6e8efb;
+  background-color: transparent;
   overflow: hidden;
   border: none;
   border-radius: 5px;
@@ -237,76 +37,102 @@ nav ul {
   justify-content: center;
 }
 
-/* Style the nav list items */
 nav ul li {
-  font-size: 16px;
-  cursor: pointer;
   border: none;
-  border-radius: 5px;
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
-  color: white;
-  transition: background 0.3s ease, transform 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  text-align: center;
+  background-color: transparent;
 }
 
-/* Style the nav links */
 nav ul li a {
   display: block;
-  color: white !important;
+  color: #6c6c6c;
   text-align: center;
-  padding: 14px 20px;
   text-decoration: none;
   transition: background-color 0.3s;
+  border: black;
 }
 
-/* Change link color on hover */
 nav ul li a:hover {
-  background: linear-gradient(135deg, #a777e3, #6e8efb);
+  color: skyblue;
   transform: scale(1.05);
 }
 
-/* Add some basic styling to the pages */
-h2 {
-  margin-top: 20px;
+.card {
+  background-color: transparent;
+  border: none;
+  padding: 1vmin;
+}
+
+.p-toast {
+  background-color: white;
+}
+
+.card-main {
+  background-color: rgba(255, 255, 255, .8);
+  border-radius: .25em;
+  box-shadow: 0 0 .25em rgba(0, 0, 0, .25);
+  box-sizing: border-box;
+  left: 50%;
+  padding: 3vmin;
+  position: fixed;
   text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
-p {
-  text-align: center;
-  font-size: 18px;
+@media (max-width: 600px) {
+  .card-main {
+    display: inline;
+    width: 100%;
+  }
 }
 
-.navbar {
-  background-color: #007bff; /* Example background color */
-  padding: 10px; /* Example padding */
+.float-label-margin {
+  margin-bottom: 1rem;
 }
 
-.navbar-brand {
-  display: inline-block;
-  height: 100px; /* Adjust height as needed */
-  padding: 10px; /* Adjust padding as needed */
+.h1-margin {
+  margin-bottom: 1rem;
+  /* Adjust the value as needed */
 }
 
-.navbar-brand img {
-  height: 100%; /* Ensures the image fills the height of the .navbar-brand */
-  width: auto; /* Allows the image to scale proportionally */
-  vertical-align: middle; /* Aligns the image vertically within the .navbar-brand */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+  }
+
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px 10px rgba(0, 123, 255, 0);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+  }
 }
 
-.navbar-nav {
+.pulsing-button {
+  padding: 20px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #5472d4;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  animation: pulse 2s infinite;
+}
+
+.spinner-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
-
-.navbar-nav .nav-item {
-  margin-right: 10px; /* Adjust spacing between items */
-}
-
-.navbar-nav .nav-item:last-child {
-  margin-right: 0; /* Remove margin from the last item */
-}
-

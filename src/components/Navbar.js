@@ -6,10 +6,10 @@ const Navbar = () => {
     return (
         <nav>
             <ul>
-                <li>
-                    <Link to="/mini">Create new Speaking Club</Link>
+                <li className='p-button p-component'>
+                    <Link to="/mini">Create Speaking Club</Link>
                 </li>
-                <li>
+                <li className='p-button p-component'>
                     <Link to="/manage">Manage Speaking Clubs</Link>
                 </li>
             </ul>
