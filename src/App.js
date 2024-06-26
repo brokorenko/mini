@@ -7,7 +7,7 @@ import Manage from './pages/Manage';
 function App() {
     return (
         <Router>
-            <div>
+            <div className='card-main'>
                 <Navbar />
                 <Routes>
                     <Route path="/mini" element={<Create />} />

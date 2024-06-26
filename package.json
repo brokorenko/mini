@@ -8,9 +8,12 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
+    "bootstrap": "^5.1.3",
     "date-fns": "^2.22.1",
     "flatpickr": "^4.6.13",
     "framer-motion": "^11.2.10",
+    "primeicons": "^7.0.0",
+    "primereact": "v10.6.6",
     "react": "^18.3.1",
     "react-datepicker": "^4.1.1",
     "react-datetime": "^3.2.0",
@@ -19,8 +22,7 @@
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "bootstrap": "^5.1.3"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "predeploy": "npm run build",
