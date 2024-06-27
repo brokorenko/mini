@@ -114,7 +114,7 @@ const Create = () => {
         userId: 431957763
       };
 
-      setShowSpinner('true')
+      setShowSpinner(true)
       axios.post('http://localhost:3000/club', data)
         .then(response => {
           handleCongratulations();
@@ -122,10 +122,10 @@ const Create = () => {
         })
         .catch(error => {
           show("Error", "Can't create speaking club", "We can't create speaking club, please try againg or text to admin");
-          setShowSpinner('false');
+          setShowSpinner(false);
         })
         .finally(() => {
-          setShowSpinner('false');
+          setShowSpinner(false);
         }
         );
     }
@@ -277,7 +277,7 @@ const Create = () => {
             </div>
             <div className="flex-auto">
               <FloatLabel>
-                <InputText id="customTopic" value={topic} onChange={(e) => handleCustomTopic(e.target.value)} aria-describedby="customTopic-help" />
+                <InputText id="customTopic" value={customTopic} onChange={(e) => handleCustomTopic(e.target.value)} aria-describedby="customTopic-help" />
                 <label htmlFor="customTopic">Short Topic Name</label>
               </FloatLabel>
               <small id="customTopic-help">
