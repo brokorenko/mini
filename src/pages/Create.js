@@ -21,7 +21,6 @@ const Create = () => {
   const [participantLimit, setParticipantLimit] = useState(null);
   const [participantLevel, setParticipantLevel] = useState('');
   const [userId, setUserId] = useState(null);
-  const datePickerRef = useRef(null);
   const [showCongratulations, setShowCongratulations] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
   const [visibleRandomPicker, setVisibleRandomPicker] = useState(null);
@@ -29,7 +28,6 @@ const Create = () => {
   const [topic, setTopic] = useState('');
   const [customTopic, setCustomTopic] = useState(null);
   const [topicId, setTopicId] = useState(null);
-  const [topicOption, setTopicOption] = useState(null);
   const [selectedQuestions, setSelectedQuestions] = useState(null);
   const toast = useRef(null);
   const [minDate, setMinDate] = useState('');
@@ -52,6 +50,20 @@ const Create = () => {
   participantLevels.set('B2 Upper-Intermediate', 'B2');
   participantLevels.set('C1 Advanced', 'C1');
   participantLevels.set('C2 Proficiency', 'C2');
+
+  const topicOptions = [
+    { name: 'Random topic', value: 'random' },
+    { name: 'Custom topic', value: 'custom' },
+  ];
+
+  const randomTopicSelectButtonOptions = [
+    { name: 'Regenerate', value: 'regenerate' },
+    { name: 'Confirm', value: 'confirm' },
+  ];
+
+  const customPickerOptions = [
+    { name: 'Confirm', value: 'confirm' },
+  ];
 
   useEffect(() => {
     // Check if Telegram WebApp object is available
@@ -90,6 +102,7 @@ const Create = () => {
   };
 
   const sendDataToBot = () => {
+    //TODO check if telegram object is available otherwise ask for log in
     // if (window.Telegram && window.Telegram.WebApp && userId) {
 
     if (topic === null && customTopic === null) {
@@ -105,7 +118,6 @@ const Create = () => {
     if (window.Telegram) {
       const data = {
         date: selectedDate,
-        topicOption: topicOption,
         topic: topic ? topic : customTopic,
         topicId: topicId,
         selectedQuestions: selectedQuestions,
@@ -131,51 +143,53 @@ const Create = () => {
     }
   };
 
-  const handleRandomClick = async () => {
+  const handleRandomTopicClick = async () => {
     try {
       const res = await axios.get('http://localhost:3000/topic/random');
       if (res === null || res.data === null || res.data.name === null || res.data.questions === null || res.data.id === null) {
         throw new Error('Invalid response');
       }
       setTopic(res.data.name);
-      setTopicOption(res.data.name);
       setSelectedQuestions(res.data.questions);
       setTopicId(res.data.id);
     } catch (error) {
+      //To avoid screen blinking
       await new Promise(resolve => setTimeout(resolve, 500));
+
       setVisibleRandomPicker(false)
       show("Error", "Error generation topic", "We can't generate topic, please try againg or select custom option");
+    } finally {
+      setShowSpinner(false)
     }
   };
 
   const handleTopicOption = (selectedOption) => {
-    if (selectedOption == 'custom') {
-      setTopicOption(null);
-      setTopic('');
-      setSelectedQuestions(null);
+    if (selectedOption === 'custom') {
       setVisibleCustomPicker(true);
       return;
     }
 
-    if (selectedOption == 'random') {
+    if (selectedOption === 'random') {
       setVisibleRandomPicker(true)
-      handleRandomClick();
+      if(topicId === null) {
+        setShowSpinner(true)
+        handleRandomTopicClick();
+      }
       return;
     }
   };
 
-  const handleRandomPicker = (selectedOption) => {
+  const handleRandomTopic = (selectedOption) => {
 
-    if (selectedOption == 'confirm') {
+    if (selectedOption === 'confirm') {
+      setCustomTopic(null);
       setVisibleRandomPicker(false);
       return;
     }
 
-    if (selectedOption == 'regenerate') {
-      setVisibleRandomPicker(true);
+    if (selectedOption === 'regenerate') {
       setTopic('');
-      setSelectedQuestions(null);
-      handleRandomClick();
+      handleRandomTopicClick();
       return;
     }
   };
@@ -183,36 +197,20 @@ const Create = () => {
   const handleCustomTopic = (selectedOption) => {
     setCustomTopic(selectedOption);
     setTopic('');
+    setTopicId(null);
     setSelectedQuestions(null);
   };
 
-  const handleCustomPicker = (selectedOption) => {
-    if (selectedOption == 'confirm') {
+  const handleCustomTopicSelectButtonClick = (selectedOption) => {
+    if (selectedOption === 'confirm') {
       setVisibleCustomPicker(false);
       return;
     }
   };
 
-  const handleTopic = (selectedOption) => {
-    if (selectedOption == 'random') {
-      handleRandomClick();
-      return;
-    }
+  const cleanSelectedTopicData = () => {
+
   };
-
-  const topicOptions = [
-    { name: 'Random topic', value: 'random' },
-    { name: 'Custom topic', value: 'custom' },
-  ];
-
-  const randomPickerOptions = [
-    { name: 'Regenerate', value: 'regenerate' },
-    { name: 'Confirm', value: 'confirm' },
-  ];
-
-  const customPickerOptions = [
-    { name: 'Confirm', value: 'confirm' },
-  ];
 
   const show = (severity, summary, detail) => {
     toast.current.show({ severity: severity, summary: summary, detail: detail, life: 4000 });
@@ -249,10 +247,10 @@ const Create = () => {
         </div>
 
         <div className="flex-auto">
-          <SelectButton value={topicOption} onChange={(e) => handleTopicOption(e.value)} optionLabel="name" options={topicOptions} />
+          <SelectButton onChange={(e) => handleTopicOption(e.value)} optionLabel="name" options={topicOptions} />
           <Dialog header="Random topic picker" visible={visibleRandomPicker} style={{ width: '50vw' }} onHide={() => { if (!visibleRandomPicker) return; setVisibleRandomPicker(false); }} breakpoints={{ '960px': '75vw', '641px': '100vw' }}>
             <div className="card flex flex-wrap justify-content-center gap-3">
-              <SelectButton value={topicOption} onChange={(e) => handleRandomPicker(e.value)} optionLabel="name" options={randomPickerOptions} />
+              <SelectButton onChange={(e) => handleRandomTopic(e.value)} optionLabel="name" options={randomTopicSelectButtonOptions} />
             </div>
             {topic ? (
               <div>
@@ -273,7 +271,7 @@ const Create = () => {
 
           <Dialog header="Create custom topic" visible={visibleCustomPicker} style={{ width: '50vw' }} onHide={() => { if (!visibleCustomPicker) return; setVisibleCustomPicker(false); }} breakpoints={{ '960px': '75vw', '641px': '100vw' }}>
             <div className="card flex flex-wrap justify-content-center gap-3 float-label-margin">
-              <SelectButton value={topicOption} onChange={(e) => handleCustomPicker(e.value)} optionLabel="name" options={customPickerOptions} />
+              <SelectButton onChange={(e) => handleCustomTopicSelectButtonClick(e.value)} optionLabel="name" options={customPickerOptions} />
             </div>
             <div className="flex-auto">
               <FloatLabel>

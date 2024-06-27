@@ -1,5 +1,6 @@
 body {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #11e959);
+  /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #11e959); */
+  background: linear-gradient(-45deg, #242323, #838383, #fbfbfb, #a1a1a1);
   background-size: 400% 400%;
   animation: gradient 5s ease infinite;
   height: 100vh;
@@ -77,6 +78,7 @@ nav ul li a:hover {
   text-align: center;
   top: 50%;
   transform: translate(-50%, -50%);
+  width: 60%;
 }
 
 @media (max-width: 600px) {
